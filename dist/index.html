@@ -13,9 +13,14 @@
 </head>
 
 <body>
-    <div id="cityWeather-container"></div>
+    <div id="cityName">
+        <input type="text" id="cityName-input" placeholder="Enter city name" />
+        <button id="getCityName"> Get it! </button>
+    </div>
 
-    <script id="cityWeather-template" type="text/x-handlebars-template">
+    <div id="citiesWeather-container"></div>
+
+    <script id="citiesWeather-template" type="text/x-handlebars-template">
         {{#each this}}
             <div class="cityWeather" data-idMeal={{idMeal}}>
                 <a class = "name"> {{name}} </a>
@@ -26,7 +31,17 @@
         {{/each}}
     </script>
 
+    <script id="cityWeather-template" type="text/x-handlebars-template">
+        <div class="cityWeather" data-idMeal={{idMeal}}>
+            <a class = "name"> {{name}} </a>
+            <img src="http://openweathermap.org/img/w/{{conditionPic}}.png">
+            <div>condition : {{condition}}</div>
+            <div>temperature : {{temperature}}</div>
+        </div>
+    </script>
+
     <script src="handlebars-helpers.js"></script>
+    <script src="model.js"></script>
     <script src="renderer.js"></script>
     <script src="main.js"></script>
 </body>

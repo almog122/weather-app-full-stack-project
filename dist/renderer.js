@@ -1,14 +1,22 @@
 class Renderer {
   constructor() {
+    this.citiesWeatherSource = $("#citiesWeather-template").html();
+    this.citiesWeatherContainer = $("#citiesWeather-container")
+
     this.cityWeatherSource = $("#cityWeather-template").html();
-    this.cityWeatherContainer = $("#cityWeather-container")
+  }
+
+  renderCitiesWeatherData(data){
+    this.citiesWeatherContainer.empty();
+    const template = Handlebars.compile(this.citiesWeatherSource);
+    const newHTML = template(data);
+    this.citiesWeatherContainer.append(newHTML);
   }
 
   renderCityWeatherData(data){
-    this.cityWeatherSource.empty();
     const template = Handlebars.compile(this.cityWeatherSource);
     const newHTML = template(data);
-    this.cityWeatherContainer.append(newHTML);
+    this.citiesWeatherContainer.append(newHTML);
   }
 
   renderPagesEmpty(){

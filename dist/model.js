@@ -5,21 +5,23 @@ class Model {
   }
 
   getCitiesWeather() {
-    $.get(`${LOCALHOST_URL}`)
+    $.get(`${this.LOCALHOST_URL}`)
       .then((citiesWeatherArr) => {
         citiesWeatherArr.forEach((cityWeather) => {
           this.citiesWeather.push(cityWeather);
         });
+        return this.citiesWeatherArr;
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  getCitiesWeather(cityName) {
-    $.get(`${LOCALHOST_URL}/${cityName}`)
+  getCityWeather(cityName) {
+    return $.get(`${this.LOCALHOST_URL}/${cityName}`)
       .then((cityWeather) => {
         this.citiesWeather.push(cityWeather);
+        return cityWeather;
       })
       .catch((error) => {
         console.log(error);
@@ -29,13 +31,13 @@ class Model {
   saveCityWeatherData(cityData) {
     let data = { cityData: cityData };
 
-    $.post(`${LOCALHOST_URL}`, data).catch((error) => {
+    $.post(`${this.LOCALHOST_URL}`, data).catch((error) => {
       console.log(error);
     });
   }
 
   deleteCityWeatherData(cityName) {
-    $.delete(`${LOCALHOST_URL}/${cityName}`).catch((error) => {
+    $.delete(`${this.LOCALHOST_URL}/${cityName}`).catch((error) => {
       console.log(error);
     });
   }

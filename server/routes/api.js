@@ -12,8 +12,18 @@ router.get("/weather/:cityName", function (req, res) {
 
   axios
     .get(`${WEATHER_URL}${cityName}${API_KEY}${UNIT}`)
-    .then(function (response) {
-      res.send(response.data);
+    .then(function (weather) {
+
+      let cityData = weather.data
+
+      let cityWeather = {
+        name: cityName,
+        temperature: cityData.main.temp,
+        condition: cityData.weather[0].description,
+        conditionPic: cityData.weather[0].icon,
+      };
+
+      res.send(cityWeather);
     });
 });
 

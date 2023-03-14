@@ -1,61 +1,23 @@
 const renderer = new Renderer();
+const model = new Model();
 
-let recipesPages = []
+const cityNameInput = $("#cityName-input");
 
-let isDairySensitive = false;
-let isGlutenSensitive = false;
-
-const ingredientInput = $("#ingredient-input");
-
-const getRecpiesByIngredient = function () {
-  let ingredient = ingredientInput.val();
-  let sensitivity = [isDairySensitive , isGlutenSensitive]
-  
-  let data = {
-    sensitivity : sensitivity
-  };
-  $.get(`/recipes/${ingredient}`, data)
-    .then((response) => {
-      firstPage = response[0]
-      Pages = response[1]
-      renderer.renderPages(Pages)
-      renderer.renderRecipesPage(firstPage);
-    })
-    .catch(() => {
-      renderer.renderPagesEmpty()
-      renderer.renderRecipesPageEmpty()
-      console.log(`Failed to find recipes`)
-    });
+const renderCitiesWeatherPage = function () {
+  let citiesWeather = model.getCitiesWeather()
+  renderer.renderCitiesWeatherData(citiesWeather)
 };
 
-const firstIngredientAlert = function () {
-  let firstIngredient = $(this).closest(".recipe").find(".Ingredients").children()[0].innerHTML;
-  alert(firstIngredient);
+const renderCityWeatherPage = function () {
+  let cityName = cityNameInput.val();
+  //need to add asynchrounously
+  model.getCityWeather(cityName).then(function (cityWeather) {
+    renderer.renderCityWeatherData(cityWeather)
+  })
 };
 
-const getRecpiesPage = function () {
-  let page = Number($(this).data('page'));
-  $.get(`/recipesPage/${page}`)
-    .then((response) => {
-      renderer.renderRecipesPage(response);
-    })
-    .catch(() => {
-      renderer.renderPagesEmpty()
-      renderer.renderRecipesPageEmpty()
-      console.log(`Failed to find page`)
-    });
-};
+renderCitiesWeatherPage()
 
-const filterRecpiesBySensitivity = function () {
-  isDairySensitive = $("#dairyCheck").is(":checked");
-  isGlutenSensitive = $("#glutenCheck").is(":checked");
-  getRecpiesByIngredient()
-};
+$('#getCityName').on('click', renderCityWeatherPage);
 
-$('#searchRecpies').on('click', getRecpiesByIngredient);
-
-$("body").on("click", "img", firstIngredientAlert);
-
-$("body").on("click", ".page", getRecpiesPage);
-
-$("input[type=checkbox]").on("change", filterRecpiesBySensitivity);
+// $("body").on("click", "img", firstIngredientAlert);
