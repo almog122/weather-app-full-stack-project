@@ -38,14 +38,17 @@ class Model {
 
   saveCityWeatherData(cityData) {
     $.post(`${this.LOCALHOST_URL}`, cityData).catch((error) => {
-      console.log(error);
-    });
+      alert(error.responseText);
+    })
   }
 
   deleteCityWeatherData(cityName) {
     $.ajax({
       url: `${this.LOCALHOST_URL}/${cityName}`,
       type: "DELETE",
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alert(errorThrown.responseText);
+     }
     });
   }
 }

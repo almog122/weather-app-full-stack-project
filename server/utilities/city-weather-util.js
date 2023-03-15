@@ -9,7 +9,7 @@ const getCityData = function (weather) {
     temperature: Math.round(cityData.main.temp),
     condition: cityData.weather[0].description,
     conditionPic: cityData.weather[0].icon,
-    date: moment().format("MM/DD/YYYY"),
+    date: moment().format('LLL'),
   };
 
   return cityWeather;
@@ -27,9 +27,5 @@ const getCityDataSchema = function (cityData) {
 
   return cityWeather;
 };
-
-// const convertDateToMoment = function (format, date) {
-//   return moment(date).format(format);
-// };
 
 module.exports = { getCityData ,getCityDataSchema };

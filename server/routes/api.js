@@ -35,8 +35,7 @@ router.get("/weather/:lat/:lon", function (req, res) {
       res.send(cityWeather);
     })
     .catch(function (error) {
-      //res.status(404).send(`couldn't find ${cityName} in weather API`);
-      res.end();
+      res.status(404).send(`couldn't find latitude:${latitude} and longitude: ${longitude} in weather API`);
     });
 });
 
@@ -49,13 +48,13 @@ router.get("/weather", function (req, res) {
 router.post("/weather", function (req, res) {
   let cityData = req.body;
 
-  Weather.findOne({ city: cityData.name }).then( (weather) => {
+  Weather.findOne({ name: cityData.name }).then((weather) => {
     if (weather) {
-      res.status(403).end();
+      res.status(403).send(`${weather.name} already exists`);
       return;
     }
-    
-    let cityWeather = cityWeatherUtil.getCityDataSchema(cityData)
+
+    let cityWeather = cityWeatherUtil.getCityDataSchema(cityData);
 
     cityWeather.save();
 
@@ -70,7 +69,7 @@ router.delete("/weather/:cityName", function (req, res) {
     if (deleted.deletedCount == 1) {
       res.send(`deleted ${cityName} from DB`);
     } else {
-      res.send(`couldn't deleted ${cityName} from DB`);
+      res.status(400).send(`couldn't deleted ${cityName} from DB`);
     }
   });
 });

@@ -7,7 +7,7 @@ const weatherSchema = new Schema({
   temperature: Number,
   condition: String,
   conditionPic: String,
-  date : { type: String, default: moment().format("MM/DD/YYYY") }
+  date : { type: String, default: moment().format('LLL') }
 });
 
 const Weather = mongoose.model("Weather", weatherSchema);

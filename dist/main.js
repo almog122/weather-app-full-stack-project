@@ -19,9 +19,11 @@ const displayCitiesWeatherPage = function () {
 const displayCityWeather = function () {
   let cityName = cityNameInput.val();
 
-  model.getCityWeatherByName(cityName).then(function (cityWeather) {
-    renderer.renderCityWeatherData(cityWeather);
-  });
+  if(cityName != ""){
+    model.getCityWeatherByName(cityName).then(function (cityWeather) {
+      renderer.renderCityWeatherData(cityWeather);
+    });
+  }
 };
 
 const saveCityWeather = function () {
@@ -63,7 +65,7 @@ const refreshCityWeather = function () {
 
 displayCitiesWeatherPage();
 
-$("#getCityName").on("click", displayCityWeather);
+$(".buttonCityName").on("click", displayCityWeather);
 
 $("body").on("click", ".saveCity", saveCityWeather);
 
