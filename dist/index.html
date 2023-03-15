@@ -4,11 +4,12 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>weather app</title>
+    <title> Weather app </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-    <script src="./jquery/dist/jquery.js"></script>
+    <!-- <script src="./jquery/dist/jquery.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="./handlebars/dist/handlebars.js"></script>
     <script src="https://kit.fontawesome.com/26a3f00b78.js" crossorigin="anonymous"></script>
 </head>
@@ -19,22 +20,37 @@
         <button id="getCityName"> Get it! </button>
     </div>
 
+    <div id="myCityWeather-container"></div>
+
     <div id="citiesWeather-container"></div>
 
     <script id="citiesWeather-template" type="text/x-handlebars-template">
         {{#each this}}
             <div class="cityWeather">
-                <a class="name">{{name}}</a>
+                <a class="name"> {{name}} </a>
                 <img data-icon={{conditionPic}} src={{correctSrcIcon conditionPic}}>
-                <div class="condition">{{condition}}</div>
-                <div class="temperature">{{temperature}} <i class="fa-regular fa-o fa-2xs"></i></div>
+                <div class="condition"> {{condition}} </div>
+                <div class="temperature"> {{temperature}} <i class="fa-regular fa-o fa-2xs"></i></div>
+                <div class="date"> {{date}} </div>
                 
                 <i class="fa-solid fa-circle-plus saveCity"></i>
                 <i class="fa-solid fa-circle-minus deleteCity"></i>
                 <i class="fa-solid fa-arrows-rotate refreshCity"></i>
-                <!-- <button class="saveCity"> Save </button>
-                <button class="deleteCity"> Delete </button> -->
             </div>
+        {{/each}}
+    </script>
+
+    <script id="cityRefreshWeather-template" type="text/x-handlebars-template">
+        {{#each this}}
+            <a class="name"> {{name}} </a>
+            <img data-icon={{conditionPic}} src={{correctSrcIcon conditionPic}}>
+            <div class="condition"> {{condition}} </div>
+            <div class="temperature"> {{temperature}} <i class="fa-regular fa-o fa-2xs"></i></div>
+            <div class="date"> {{date}} </div>
+            
+            <i class="fa-solid fa-circle-plus saveCity"></i>
+            <i class="fa-solid fa-circle-minus deleteCity"></i>
+            <i class="fa-solid fa-arrows-rotate refreshCity"></i>
         {{/each}}
     </script>
 

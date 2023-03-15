@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const moment = require("moment");
 
 const weatherSchema = new Schema({
   name: String,
   temperature: Number,
   condition: String,
   conditionPic: String,
+  date : { type: String, default: moment().format("MM/DD/YYYY") }
 });
 
 const Weather = mongoose.model("Weather", weatherSchema);

@@ -16,9 +16,19 @@ class Model {
     }
   }
 
-  async getCityWeather(cityName) {
+  async getCityWeatherByName(cityName) {
     try {
       const cityWeather = await $.get(`${this.LOCALHOST_URL}/${cityName}`);
+      this.citiesWeather.push(cityWeather);
+      return [cityWeather];
+    } catch (error) {
+      alert(error.responseText);
+    }
+  }
+
+  async getCityWeatherByGeo(lat,lon) {
+    try {
+      const cityWeather = await $.get(`${this.LOCALHOST_URL}/${lat}/${lon}`);
       this.citiesWeather.push(cityWeather);
       return [cityWeather];
     } catch (error) {

@@ -8,6 +8,12 @@ body {
   height: 30px;
 }
 
+#myCityWeather-container {
+  font-family: "PT Sans", sans-serif;
+  margin: 20px;
+  background-color: #34d041;
+}
+
 #citiesWeather-container {
   font-family: "PT Sans", sans-serif;
   display: grid;
@@ -20,7 +26,7 @@ body {
   display: grid;
   grid-template-areas: 
   "p t t i i"
-  "p n n c c";
+  "r n n c c";
   align-items:center
 }
 
@@ -52,4 +58,15 @@ body {
   cursor: pointer;
   display: inline;
   margin-left: 30px;
+}
+
+.refreshCity{
+  grid-area: r;
+  cursor: pointer;
+  margin-left: 100px;
+}
+
+.date{
+  grid-area: r;
+
 }
