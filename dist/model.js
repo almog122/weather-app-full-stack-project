@@ -12,7 +12,7 @@ class Model {
       });
       return citiesWeatherArr;
     } catch (error) {
-      console.log(error);
+      alert(error.responseText);
     }
   }
 
@@ -22,7 +22,7 @@ class Model {
       this.citiesWeather.push(cityWeather);
       return [cityWeather];
     } catch (error) {
-      console.log(error);
+      alert(error.responseText);
     }
   }
 
