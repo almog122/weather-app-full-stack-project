@@ -24,7 +24,9 @@ router.get("/weather/:cityName", function (req, res) {
       };
 
       res.send(cityWeather);
-    });
+    }).catch(function (error) {
+      res.status(404).send(`couldn't find ${cityName} in weather API`);
+    })
 });
 
 router.get("/weather", function (req, res) {
@@ -34,7 +36,7 @@ router.get("/weather", function (req, res) {
 });
 
 router.post("/weather", function (req, res) {
-  let cityData = req.query.cityData;
+  let cityData = req.body;
 
   let cityWeather = new Weather({
     name: cityData.name,

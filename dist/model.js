@@ -4,41 +4,38 @@ class Model {
     this.LOCALHOST_URL = "http://localhost:3000/weather";
   }
 
-  getCitiesWeather() {
-    $.get(`${this.LOCALHOST_URL}`)
-      .then((citiesWeatherArr) => {
-        citiesWeatherArr.forEach((cityWeather) => {
-          this.citiesWeather.push(cityWeather);
-        });
-        return this.citiesWeatherArr;
-      })
-      .catch((error) => {
-        console.log(error);
+  async getCitiesWeather() {
+    try {
+      const citiesWeatherArr = await $.get(`${this.LOCALHOST_URL}`);
+      citiesWeatherArr.forEach((cityWeather) => {
+        this.citiesWeather.push(cityWeather);
       });
+      return citiesWeatherArr;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  getCityWeather(cityName) {
-    return $.get(`${this.LOCALHOST_URL}/${cityName}`)
-      .then((cityWeather) => {
-        this.citiesWeather.push(cityWeather);
-        return cityWeather;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  async getCityWeather(cityName) {
+    try {
+      const cityWeather = await $.get(`${this.LOCALHOST_URL}/${cityName}`);
+      this.citiesWeather.push(cityWeather);
+      return [cityWeather];
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   saveCityWeatherData(cityData) {
-    let data = { cityData: cityData };
-
-    $.post(`${this.LOCALHOST_URL}`, data).catch((error) => {
+    $.post(`${this.LOCALHOST_URL}`, cityData).catch((error) => {
       console.log(error);
     });
   }
 
   deleteCityWeatherData(cityName) {
-    $.delete(`${this.LOCALHOST_URL}/${cityName}`).catch((error) => {
-      console.log(error);
+    $.ajax({
+      url: `${this.LOCALHOST_URL}/${cityName}`,
+      type: "DELETE",
     });
   }
 }
