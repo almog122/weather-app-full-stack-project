@@ -8,7 +8,9 @@ const displayCitiesWeatherPage = function () {
     model
       .getCityWeatherByGeo(location.coords.latitude, location.coords.longitude)
       .then(function (cityWeather) {
-        renderer.renderMyCityWeatherData(cityWeather);
+        if(cityWeather){
+          renderer.renderGeoCityWeatherData(cityWeather);
+        }
       });
   });
 
@@ -22,51 +24,31 @@ const displayCityWeather = function () {
 
   if (cityName != "") {
     model.getCityWeatherByName(cityName).then(function (cityWeather) {
-      renderer.renderCityWeatherData(cityWeather);
+      if(cityWeather){
+        renderer.renderCityWeatherData(cityWeather);
+      }
     });
   }
 };
 
 const saveCityWeather = function () {
   let parent = $(this).closest(".cityWeather");
-  let childrens = parent.children();
-  let cityName = childrens[0].textContent.trim();
-  let conditionPic = childrens[1].dataset.icon;
-  let condition = childrens[2].textContent.trim();
-  let temperature = childrens[3].textContent.trim();;
-  let date = childrens[4].textContent.trim();
 
-  let cityData = {
-    name: cityName,
-    temperature: temperature,
-    condition: condition,
-    conditionPic: conditionPic,
-    date: date,
-  };
+  let cityData = model.getAndMapDataFromCityWeather(parent)
 
-  model.saveCityWeatherData(cityData).then((cityWeather) => {
-    renderer.renderRefreshCityWeatherData(parent, cityWeather);
+  model.saveCityWeatherData(cityData).then((savedCityWeather) => {
+    if(savedCityWeather){
+      renderer.renderRefreshCityWeatherData(parent, savedCityWeather);
+    }
   });
 };
 
 const deleteCityWeather = function () {
   let parent = $(this).closest(".cityWeather");
-  let childrens = parent.children();
-  let cityName = childrens[0].textContent.trim();
-  let conditionPic = childrens[1].dataset.icon;
-  let condition = childrens[2].textContent.trim();
-  let temperature = childrens[3].textContent.trim();;
-  let date = childrens[4].textContent.trim();
 
-  let cityData = {
-    name: cityName,
-    temperature: temperature,
-    condition: condition,
-    conditionPic: conditionPic,
-    date: date,
-  };
+  let cityData = model.getAndMapDataFromCityWeather(parent)
 
-  model.deleteCityWeatherData(cityName).then((isDeleted) => {
+  model.deleteCityWeatherData(cityData.name).then((isDeleted) => {
     if (isDeleted) {
       renderer.renderRefreshCityWeatherData(parent, cityData);
     }

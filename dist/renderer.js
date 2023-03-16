@@ -1,8 +1,10 @@
 class Renderer {
   constructor() {
     this.citiesWeatherSource = $("#citiesWeather-template").html();
-    this.cityRefreshWeatherSource = $("#cityRefreshWeather-template").html();
     this.citiesWeatherContainer = $("#citiesWeather-container")
+
+    this.cityRefreshWeatherSource = $("#cityRefreshWeather-template").html();
+    
     this.myCityWeatherContainer = $("#myCityWeather-container")
   }
 
@@ -19,7 +21,7 @@ class Renderer {
     this.citiesWeatherContainer.append(newHTML);
   }
 
-  renderMyCityWeatherData(data){
+  renderGeoCityWeatherData(data){
     const template = Handlebars.compile(this.citiesWeatherSource);
     const newHTML = template([data]);
     this.myCityWeatherContainer.append(newHTML);

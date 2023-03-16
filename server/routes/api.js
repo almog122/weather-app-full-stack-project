@@ -14,8 +14,8 @@ router.get("/weather/:cityName", function (req, res) {
   axios
     .get(`${WEATHER_URL}q=${cityName}${API_KEY}${UNIT}`)
     .then(function (weather) {
-      let cityWeather = cityWeatherUtil.getCityData(weather);
 
+      let cityWeather = cityWeatherUtil.getCityData(weather);
       res.send(cityWeather);
     })
     .catch(function (error) {
@@ -30,8 +30,8 @@ router.get("/weather/:lat/:lon", function (req, res) {
   axios
     .get(`${WEATHER_URL}lat=${latitude}&lon=${longitude}${API_KEY}${UNIT}`)
     .then(function (weather) {
-      let cityWeather = cityWeatherUtil.getCityData(weather);
 
+      let cityWeather = cityWeatherUtil.getCityData(weather);
       res.send(cityWeather);
     })
     .catch(function (error) {
@@ -60,9 +60,9 @@ router.post("/weather", function (req, res) {
       res.status(201).send(savedCityWeather);
     })
     .catch((error) => {
-      res.status(400).end();
+      res.status(400).send(false);
     });
-    
+
   });
 });
 

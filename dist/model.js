@@ -13,6 +13,7 @@ class Model {
       return citiesWeatherArr;
     } catch (error) {
       alert(error.responseText);
+      return false
     }
   }
 
@@ -23,6 +24,7 @@ class Model {
       return cityWeather;
     } catch (error) {
       alert(error.responseText);
+      return false
     }
   }
 
@@ -33,15 +35,17 @@ class Model {
       return cityWeather;
     } catch (error) {
       alert(error.responseText);
+      return false
     }
   }
 
   async saveCityWeatherData(cityData) {
     try {
-      const cityWeather = await $.post(`${this.LOCALHOST_URL}`, cityData);
-      return cityWeather;
+      const savedCityWeather = await $.post(`${this.LOCALHOST_URL}`, cityData);
+      return savedCityWeather;
     } catch (error) {
       alert(error.responseText);
+      return false
     }
   }
 
@@ -57,5 +61,24 @@ class Model {
         return false;
       },
     });
+  }
+
+  getAndMapDataFromCityWeather(parent) {
+    let childrens = parent.children();
+    let cityName = childrens[0].textContent.trim();
+    let conditionPic = childrens[1].dataset.icon;
+    let condition = childrens[2].textContent.trim();
+    let temperature = childrens[3].textContent.trim();;
+    let date = childrens[4].textContent.trim();
+  
+    let cityData = {
+      name: cityName,
+      temperature: temperature,
+      condition: condition,
+      conditionPic: conditionPic,
+      date: date,
+    };
+
+    return cityData;
   }
 }
