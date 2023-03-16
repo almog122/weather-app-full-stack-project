@@ -32,9 +32,12 @@
                 <div class="condition"> {{condition}} </div>
                 <div class="temperature"> {{temperature}} <i class="fa-regular fa-o fa-2xs"></i></div>
                 <div class="date"> {{date}} </div>
-                
-                <i class="fa-solid fa-circle-plus saveCity"></i>
-                <i class="fa-solid fa-circle-minus deleteCity"></i>
+                     
+                {{#if _id}}
+                    <i class="fa-solid fa-circle-minus deleteCity"></i>
+                {{else}}
+                    <i class="fa-solid fa-circle-plus saveCity"></i>
+                {{/if}}
                 <i class="fa-solid fa-arrows-rotate refreshCity"></i>
             </div>
         {{/each}}
@@ -48,8 +51,11 @@
             <div class="temperature"> {{temperature}} <i class="fa-regular fa-o fa-2xs"></i></div>
             <div class="date"> {{date}} </div>
             
-            <i class="fa-solid fa-circle-plus saveCity"></i>
-            <i class="fa-solid fa-circle-minus deleteCity"></i>
+            {{#if _id}}
+                <i class="fa-solid fa-circle-minus deleteCity"></i>
+            {{else}}
+                <i class="fa-solid fa-circle-plus saveCity"></i>
+            {{/if}}
             <i class="fa-solid fa-arrows-rotate refreshCity"></i>
         {{/each}}
     </script>

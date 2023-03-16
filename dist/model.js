@@ -20,35 +20,42 @@ class Model {
     try {
       const cityWeather = await $.get(`${this.LOCALHOST_URL}/${cityName}`);
       this.citiesWeather.push(cityWeather);
-      return [cityWeather];
+      return cityWeather;
     } catch (error) {
       alert(error.responseText);
     }
   }
 
-  async getCityWeatherByGeo(lat,lon) {
+  async getCityWeatherByGeo(lat, lon) {
     try {
       const cityWeather = await $.get(`${this.LOCALHOST_URL}/${lat}/${lon}`);
       this.citiesWeather.push(cityWeather);
-      return [cityWeather];
+      return cityWeather;
     } catch (error) {
       alert(error.responseText);
     }
   }
 
-  saveCityWeatherData(cityData) {
-    $.post(`${this.LOCALHOST_URL}`, cityData).catch((error) => {
+  async saveCityWeatherData(cityData) {
+    try {
+      const cityWeather = await $.post(`${this.LOCALHOST_URL}`, cityData);
+      return cityWeather;
+    } catch (error) {
       alert(error.responseText);
-    })
+    }
   }
 
   deleteCityWeatherData(cityName) {
-    $.ajax({
+    return $.ajax({
       url: `${this.LOCALHOST_URL}/${cityName}`,
       type: "DELETE",
-      error: function(XMLHttpRequest, textStatus, errorThrown) {
-        alert(errorThrown.responseText);
-     }
+      success: (response) => {
+        return true;
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        alert(errorThrown);
+        return false;
+      },
     });
   }
 }

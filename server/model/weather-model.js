@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const moment = require("moment");
 
 const weatherSchema = new Schema({
-  name: String,
+  name: { type: String, required: true },
   temperature: Number,
   condition: String,
   conditionPic: String,

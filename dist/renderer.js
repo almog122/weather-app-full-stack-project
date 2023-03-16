@@ -15,20 +15,20 @@ class Renderer {
 
   renderCityWeatherData(data){
     const template = Handlebars.compile(this.citiesWeatherSource);
-    const newHTML = template(data);
+    const newHTML = template([data]);
     this.citiesWeatherContainer.append(newHTML);
   }
 
   renderMyCityWeatherData(data){
     const template = Handlebars.compile(this.citiesWeatherSource);
-    const newHTML = template(data);
+    const newHTML = template([data]);
     this.myCityWeatherContainer.append(newHTML);
   }
 
   renderRefreshCityWeatherData(cityWeatherContainer, data){
     cityWeatherContainer.empty();
     const template = Handlebars.compile(this.cityRefreshWeatherSource);
-    const newHTML = template(data);
+    const newHTML = template([data]);
     cityWeatherContainer.append(newHTML);
   }
 

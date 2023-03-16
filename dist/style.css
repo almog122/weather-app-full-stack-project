@@ -49,21 +49,22 @@ body {
 .saveCity{
   grid-area: p;
   cursor: pointer;
-  display: inline;
+  display: inline-block;
   margin-left: 10px;
 }
 
 .deleteCity{
   grid-area: p;
   cursor: pointer;
-  display: inline;
-  margin-left: 30px;
+  display: inline-block;
+  margin-left: 10px;
 }
 
 .refreshCity{
-  grid-area: r;
+  grid-area: p;
   cursor: pointer;
-  margin-left: 100px;
+  display: inline-block;
+  margin-left: 40px;
 }
 
 .date{

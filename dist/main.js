@@ -4,12 +4,13 @@ const model = new Model();
 const cityNameInput = $("#cityName-input");
 
 const displayCitiesWeatherPage = function () {
-
-  navigator.geolocation.getCurrentPosition((location) =>{
-    model.getCityWeatherByGeo(location.coords.latitude , location.coords.longitude ).then(function (cityWeather) {
-      renderer.renderMyCityWeatherData(cityWeather);
-    });
-  })
+  navigator.geolocation.getCurrentPosition((location) => {
+    model
+      .getCityWeatherByGeo(location.coords.latitude, location.coords.longitude)
+      .then(function (cityWeather) {
+        renderer.renderMyCityWeatherData(cityWeather);
+      });
+  });
 
   model.getCitiesWeather().then(function (citiesWeather) {
     renderer.renderCitiesWeatherData(citiesWeather);
@@ -19,7 +20,7 @@ const displayCitiesWeatherPage = function () {
 const displayCityWeather = function () {
   let cityName = cityNameInput.val();
 
-  if(cityName != ""){
+  if (cityName != "") {
     model.getCityWeatherByName(cityName).then(function (cityWeather) {
       renderer.renderCityWeatherData(cityWeather);
     });
@@ -29,29 +30,47 @@ const displayCityWeather = function () {
 const saveCityWeather = function () {
   let parent = $(this).closest(".cityWeather");
   let childrens = parent.children();
-  let cityName = childrens[0];
-  let conditionPic = childrens[1];
-  let condition = childrens[2];
-  let temperature = childrens[3];
-  let date = childrens[4];
+  let cityName = childrens[0].textContent.trim();
+  let conditionPic = childrens[1].dataset.icon;
+  let condition = childrens[2].textContent.trim();
+  let temperature = childrens[3].textContent.trim();;
+  let date = childrens[4].textContent.trim();
 
   let cityData = {
-    name: cityName.textContent.trim(),
-    temperature: temperature.textContent.trim(),
-    condition: condition.textContent.trim(),
-    conditionPic: conditionPic.dataset.icon.trim(),
-    date : date.textContent.trim()
+    name: cityName,
+    temperature: temperature,
+    condition: condition,
+    conditionPic: conditionPic,
+    date: date,
   };
 
-  model.saveCityWeatherData(cityData);
+  model.saveCityWeatherData(cityData).then((cityWeather) => {
+    renderer.renderRefreshCityWeatherData(parent, cityWeather);
+  });
 };
 
 const deleteCityWeather = function () {
   let parent = $(this).closest(".cityWeather");
   let childrens = parent.children();
   let cityName = childrens[0].textContent.trim();
+  let conditionPic = childrens[1].dataset.icon;
+  let condition = childrens[2].textContent.trim();
+  let temperature = childrens[3].textContent.trim();;
+  let date = childrens[4].textContent.trim();
 
-  model.deleteCityWeatherData(cityName);
+  let cityData = {
+    name: cityName,
+    temperature: temperature,
+    condition: condition,
+    conditionPic: conditionPic,
+    date: date,
+  };
+
+  model.deleteCityWeatherData(cityName).then((isDeleted) => {
+    if (isDeleted) {
+      renderer.renderRefreshCityWeatherData(parent, cityData);
+    }
+  });
 };
 
 const refreshCityWeather = function () {

@@ -56,9 +56,13 @@ router.post("/weather", function (req, res) {
 
     let cityWeather = cityWeatherUtil.getCityDataSchema(cityData);
 
-    cityWeather.save();
-
-    res.status(201).end();
+    cityWeather.save().then((savedCityWeather) =>{
+      res.status(201).send(savedCityWeather);
+    })
+    .catch((error) => {
+      res.status(400).end();
+    });
+    
   });
 });
 
