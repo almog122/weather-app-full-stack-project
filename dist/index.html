@@ -30,7 +30,10 @@
 
     <script id="citiesWeather-template" type="text/x-handlebars-template">
         {{#each this}}
+
+            {{#unless isRefreshData}}
             <div class="cityWeather row text-center justify-contect-center align-items-center mt-3 border-0 rounded shadow ">
+            {{/unless}}
 
                 <div class="col-2">
                     {{#if _id}}
@@ -55,36 +58,9 @@
                     <div class="date"> {{date}} </div>
                 </div>
 
+            {{#unless isRefreshData}}
             </div>
-        {{/each}}
-    </script>
-
-    <script id="cityRefreshWeather-template" type="text/x-handlebars-template">
-        {{#each this}}
-            
-            <div class="col-2">
-                {{#if _id}}
-                    <i class="fa-solid fa-circle-minus deleteCity"></i>
-                {{else}}
-                    <i class="fa-solid fa-circle-plus saveCity"></i>
-                {{/if}}
-            </div>
-
-            <div class="col-3">
-                <div class="temperature"> {{temperature}} <i class="fa-regular fa-o fa-2xs align-top mt-3"></i></div>
-                <div class="name"> {{name}} </div>           
-            </div>
-
-            <div class="col-3">
-                <img data-icon={{conditionPic}} src={{correctSrcIcon conditionPic}}>
-                <div class="condition"> {{condition}} </div>
-            </div>
-
-            <div class="col-4">
-                <i class="fa-solid fa-arrows-rotate refreshCity"></i>
-                <div class="date"> {{date}} </div>
-            </div>
-
+            {{/unless}}
         {{/each}}
     </script>
 

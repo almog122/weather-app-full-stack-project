@@ -14,7 +14,6 @@ router.get("/weather/:cityName", function (req, res) {
   axios
     .get(`${WEATHER_URL}q=${cityName}${API_KEY}${UNIT}`)
     .then(function (weather) {
-
       let cityWeather = cityWeatherUtil.getCityData(weather);
       res.send(cityWeather);
     })
@@ -30,12 +29,13 @@ router.get("/weather/:lat/:lon", function (req, res) {
   axios
     .get(`${WEATHER_URL}lat=${latitude}&lon=${longitude}${API_KEY}${UNIT}`)
     .then(function (weather) {
-
       let cityWeather = cityWeatherUtil.getCityData(weather);
       res.send(cityWeather);
     })
     .catch(function (error) {
-      res.status(404).send(`couldn't find latitude:${latitude} and longitude: ${longitude} in weather API`);
+      res
+        .status(404)
+        .send(`couldn't find latitude:${latitude} and longitude: ${longitude} in weather API`);
     });
 });
 
@@ -48,22 +48,16 @@ router.get("/weather", function (req, res) {
 router.post("/weather", function (req, res) {
   let cityData = req.body;
 
-  Weather.findOne({ name: cityData.name }).then((weather) => {
-    if (weather) {
-      res.status(403).send(`${weather.name} already exists`);
-      return;
-    }
+  let cityWeather = cityWeatherUtil.getCityDataSchema(cityData);
 
-    let cityWeather = cityWeatherUtil.getCityDataSchema(cityData);
-
-    cityWeather.save().then((savedCityWeather) =>{
+  cityWeather
+    .save()
+    .then((savedCityWeather) => {
       res.status(201).send(savedCityWeather);
     })
     .catch((error) => {
-      res.status(400).send(false);
+      res.status(400).send(`couldn't save ${cityWeather.name}`);
     });
-
-  });
 });
 
 router.delete("/weather/:cityName", function (req, res) {

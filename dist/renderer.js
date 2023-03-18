@@ -1,10 +1,8 @@
 class Renderer {
   constructor() {
     this.citiesWeatherSource = $("#citiesWeather-template").html();
-    this.citiesWeatherContainer = $("#citiesWeather-container")
-
-    this.cityRefreshWeatherSource = $("#cityRefreshWeather-template").html();
     
+    this.citiesWeatherContainer = $("#citiesWeather-container")
     this.myCityWeatherContainer = $("#myCityWeather-container")
   }
 
@@ -29,7 +27,8 @@ class Renderer {
 
   renderRefreshCityWeatherData(cityWeatherContainer, data){
     cityWeatherContainer.empty();
-    const template = Handlebars.compile(this.cityRefreshWeatherSource);
+    const template = Handlebars.compile(this.citiesWeatherSource);
+    data['isRefreshData'] = true;
     const newHTML = template([data]);
     cityWeatherContainer.append(newHTML);
   }
