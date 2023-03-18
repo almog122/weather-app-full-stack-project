@@ -9,7 +9,7 @@ const getCityData = function (weather) {
     temperature: Math.round(cityData.main.temp),
     condition: cityData.weather[0].description,
     conditionPic: cityData.weather[0].icon,
-    date: moment().format('LLL'),
+    date: moment().locale('en-il').format('LLL'),
   };
 
   return cityWeather;

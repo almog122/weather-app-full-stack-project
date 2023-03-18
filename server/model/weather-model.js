@@ -7,7 +7,7 @@ const weatherSchema = new Schema({
   temperature: Number,
   condition: String,
   conditionPic: String,
-  date : { type: String, default: moment().format('LLL') }
+  date : { type: String, default: moment().locale('en-il').format('LLL') }
 });
 
 const Weather = mongoose.model("Weather", weatherSchema);

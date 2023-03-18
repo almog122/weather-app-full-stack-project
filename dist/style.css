@@ -1,8 +1,55 @@
 body {
-  background-color: #3d5fdc;
+  background-color: #2da4f3;
 }
 
-#cityName{
+img{
+  width: 43px;
+  height: 43px;
+}
+
+#cityName {
+  position: relative;
+  margin: 10px;
+}
+
+#cityName-input{
+  font-family: inherit;
+  border: 0;
+  border-bottom: 2px solid white;
+  outline: 0;
+  font-size: 1.3rem;
+  color: white;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+#cityName-input::placeholder {
+  font-weight: bold;
+  opacity: 0.5;
+  color: white;
+}
+
+.buttonCityName{
+  color: aliceblue;
+}
+
+.deleteCity{
+  color: red;
+}
+
+.saveCity{
+  color: green;
+}
+
+.temperature{
+  font-size: 30px;
+}
+
+.temperature > i{
+  font-size:small
+}
+/* #cityName{
   font-weight: bold;
   font-size: large;
   height: 30px;
@@ -70,4 +117,4 @@ body {
 .date{
   grid-area: r;
 
-}
+} */

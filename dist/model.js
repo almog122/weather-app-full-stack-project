@@ -64,12 +64,12 @@ class Model {
   }
 
   getAndMapDataFromCityWeather(parent) {
-    let childrens = parent.children();
-    let cityName = childrens[0].textContent.trim();
-    let conditionPic = childrens[1].dataset.icon;
-    let condition = childrens[2].textContent.trim();
-    let temperature = childrens[3].textContent.trim();;
-    let date = childrens[4].textContent.trim();
+    // let childrens = parent.children();
+    let cityName = parent.find('.name')[0].textContent.trim();
+    let conditionPic = parent.find('img')[0].dataset.icon;
+    let condition = parent.find('.condition')[0].textContent.trim();
+    let temperature = parent.find('.temperature')[0].textContent.trim();;
+    let date = parent.find('.date')[0].textContent.trim();
   
     let cityData = {
       name: cityName,

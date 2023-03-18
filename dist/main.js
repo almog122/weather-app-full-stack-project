@@ -57,7 +57,7 @@ const deleteCityWeather = function () {
 
 const refreshCityWeather = function () {
   let parent = $(this).closest(".cityWeather");
-  let cityName = parent.children()[0].textContent.trim();
+  let cityName = parent.find('.name')[0].textContent.trim();
 
   model.getCityWeatherByName(cityName).then((cityWeather) => {
     renderer.renderRefreshCityWeatherData(parent, cityWeather);

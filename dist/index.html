@@ -7,6 +7,8 @@
     <title> Weather app </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     <!-- <script src="./jquery/dist/jquery.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -15,51 +17,83 @@
 </head>
 
 <body>
-    <div id="cityName">
+
+    <div id="cityName container-sm mt-2">
         <input type="text" id="cityName-input" placeholder="Enter city name" />
         <i class="fa-solid fa-magnifying-glass buttonCityName"></i>
-    </div>
+    
 
-    <div id="myCityWeather-container"></div>
+    <div id="myCityWeather-container" class='container-sm'></div>
 
-    <div id="citiesWeather-container"></div>
+    <div id="citiesWeather-container" class="container-sm"></div>
+</div>
 
     <script id="citiesWeather-template" type="text/x-handlebars-template">
         {{#each this}}
-            <div class="cityWeather">
-                <a class="name"> {{name}} </a>
-                <img data-icon={{conditionPic}} src={{correctSrcIcon conditionPic}}>
-                <div class="condition"> {{condition}} </div>
-                <div class="temperature"> {{temperature}} <i class="fa-regular fa-o fa-2xs"></i></div>
-                <div class="date"> {{date}} </div>
-                     
-                {{#if _id}}
-                    <i class="fa-solid fa-circle-minus deleteCity"></i>
-                {{else}}
-                    <i class="fa-solid fa-circle-plus saveCity"></i>
-                {{/if}}
-                <i class="fa-solid fa-arrows-rotate refreshCity"></i>
+            <div class="cityWeather row text-center justify-contect-center align-items-center mt-3 border-0 rounded shadow ">
+
+                <div class="col-2">
+                    {{#if _id}}
+                        <i class="fa-solid fa-circle-minus deleteCity"></i>
+                    {{else}}
+                        <i class="fa-solid fa-circle-plus saveCity"></i>
+                    {{/if}}
+                </div>
+
+                <div class="col-3">
+                    <div class="temperature"> {{temperature}} <i class="fa-regular fa-o fa-2xs align-top mt-3"></i></div>
+                    <div class="name"> {{name}} </div>           
+                </div>
+
+                <div class="col-3">
+                    <img data-icon={{conditionPic}} src={{correctSrcIcon conditionPic}}>
+                    <div class="condition"> {{condition}} </div>
+                </div>
+
+                <div class="col-4">
+                    <i class="fa-solid fa-arrows-rotate refreshCity"></i>
+                    <div class="date"> {{date}} </div>
+                </div>
+
             </div>
         {{/each}}
     </script>
 
     <script id="cityRefreshWeather-template" type="text/x-handlebars-template">
         {{#each this}}
-            <a class="name"> {{name}} </a>
-            <img data-icon={{conditionPic}} src={{correctSrcIcon conditionPic}}>
-            <div class="condition"> {{condition}} </div>
-            <div class="temperature"> {{temperature}} <i class="fa-regular fa-o fa-2xs"></i></div>
-            <div class="date"> {{date}} </div>
             
-            {{#if _id}}
-                <i class="fa-solid fa-circle-minus deleteCity"></i>
-            {{else}}
-                <i class="fa-solid fa-circle-plus saveCity"></i>
-            {{/if}}
-            <i class="fa-solid fa-arrows-rotate refreshCity"></i>
+            <div class="col-2">
+                {{#if _id}}
+                    <i class="fa-solid fa-circle-minus deleteCity"></i>
+                {{else}}
+                    <i class="fa-solid fa-circle-plus saveCity"></i>
+                {{/if}}
+            </div>
+
+            <div class="col-3">
+                <div class="temperature"> {{temperature}} <i class="fa-regular fa-o fa-2xs align-top mt-3"></i></div>
+                <div class="name"> {{name}} </div>           
+            </div>
+
+            <div class="col-3">
+                <img data-icon={{conditionPic}} src={{correctSrcIcon conditionPic}}>
+                <div class="condition"> {{condition}} </div>
+            </div>
+
+            <div class="col-4">
+                <i class="fa-solid fa-arrows-rotate refreshCity"></i>
+                <div class="date"> {{date}} </div>
+            </div>
+
         {{/each}}
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+        crossorigin="anonymous"></script>
     <script src="handlebars-helpers.js"></script>
     <script src="model.js"></script>
     <script src="renderer.js"></script>
