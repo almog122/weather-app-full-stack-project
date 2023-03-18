@@ -8,20 +8,15 @@ img{
 }
 
 #cityName {
-  position: relative;
-  margin: 10px;
+  margin: 5px;
 }
 
 #cityName-input{
-  font-family: inherit;
   border: 0;
   border-bottom: 2px solid white;
-  outline: 0;
   font-size: 1.3rem;
-  color: white;
   padding: 7px 0;
   background: transparent;
-  transition: border-color 0.2s;
 }
 
 #cityName-input::placeholder {
@@ -47,5 +42,5 @@ img{
 }
 
 .temperature > i{
-  font-size:small
+  font-size: small;
 }
