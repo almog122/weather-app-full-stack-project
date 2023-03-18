@@ -64,7 +64,7 @@ class Model {
   }
 
   getAndMapDataFromCityWeather(parent) {
-    // let childrens = parent.children();
+    
     let cityName = parent.find('.name')[0].textContent.trim();
     let conditionPic = parent.find('img')[0].dataset.icon;
     let condition = parent.find('.condition')[0].textContent.trim();
