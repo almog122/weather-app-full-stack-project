@@ -62,8 +62,9 @@ router.post("/weather", function (req, res) {
 
 router.delete("/weather/:cityName", function (req, res) {
   let cityName = req.params.cityName;
+  let date = req.body.date;
 
-  Weather.deleteOne({ name: cityName }).then((deleted) => {
+  Weather.deleteOne({ name: cityName  , date : date}).then((deleted) => {
     if (deleted.deletedCount == 1) {
       res.send(`deleted ${cityName} from DB`);
     } else {

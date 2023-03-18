@@ -3,7 +3,7 @@ const model = new Model();
 
 const cityNameInput = $("#cityName-input");
 
-const displayCitiesWeatherPage = function () {
+const displayGeoCityWeather = function(){
   navigator.geolocation.getCurrentPosition((location) => {
     model
       .getCityWeatherByGeo(location.coords.latitude, location.coords.longitude)
@@ -13,7 +13,9 @@ const displayCitiesWeatherPage = function () {
         }
       });
   });
+}
 
+const displayCitiesWeather = function () {
   model.getCitiesWeather().then(function (citiesWeather) {
     renderer.renderCitiesWeatherData(citiesWeather);
   });
@@ -39,6 +41,7 @@ const saveCityWeather = function () {
   model.saveCityWeatherData(cityData).then((savedCityWeather) => {
     if(savedCityWeather){
       renderer.renderRefreshCityWeatherData(parent, savedCityWeather);
+      displayCitiesWeather();
     }
   });
 };
@@ -48,7 +51,7 @@ const deleteCityWeather = function () {
 
   let cityData = model.getAndMapDataFromCityWeather(parent)
 
-  model.deleteCityWeatherData(cityData.name).then((isDeleted) => {
+  model.deleteCityWeatherData(cityData.name , cityData.date ).then((isDeleted) => {
     if (isDeleted) {
       renderer.renderRefreshCityWeatherData(parent, cityData);
     }
@@ -64,7 +67,12 @@ const refreshCityWeather = function () {
   });
 };
 
-displayCitiesWeatherPage();
+const displayPage = function () {
+  displayGeoCityWeather();
+  displayCitiesWeather();
+}
+
+displayPage();
 
 $(".buttonCityName").on("click", displayCityWeather);
 

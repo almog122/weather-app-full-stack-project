@@ -49,9 +49,12 @@ class Model {
     }
   }
 
-  deleteCityWeatherData(cityName) {
+  deleteCityWeatherData(cityName ,date) {
     return $.ajax({
       url: `${this.LOCALHOST_URL}/${cityName}`,
+      data:{
+        date: date
+      },
       type: "DELETE",
       success: (response) => {
         return true;
@@ -64,7 +67,7 @@ class Model {
   }
 
   getAndMapDataFromCityWeather(parent) {
-    
+
     let cityName = parent.find('.name')[0].textContent.trim();
     let conditionPic = parent.find('img')[0].dataset.icon;
     let condition = parent.find('.condition')[0].textContent.trim();
